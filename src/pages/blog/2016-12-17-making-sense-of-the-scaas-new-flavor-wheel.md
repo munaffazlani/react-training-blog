@@ -60,7 +60,9 @@ Till now, you were storing state inside the component and it's handler functions
 
 ### Reducer in code
 
-Reducer is also a Function which will accept two things in the argument. First thing is your initial state. And another thing is all your action functions. 
+Create a separate folder for reducer, make a simple js file and name it anything.
+
+Reducer is just a Function which will accept two things in the argument. First thing is your initial state. And another thing is all your action functions. 
 
 You will have to pass down the initial state as state = initialState. 
 
@@ -72,29 +74,77 @@ Your reducer is listening to all the actions by default. Than with the switch ca
 
 When you created your action function, you stored your command in type key, thats why we are using type here,  you can name anything but type is standard.
 
-If you want to access the payload from the action you can just say action.payload. That's how you will change that state. And that will update every where. 
+If you want to access the payload from the action you can just say action.payloadName. That's how you will change that state. And that will update every where. 
+
+Do not forget to export reducer. That will help us to create our store.
+
+\-----------reducers-example-------------
+
+### Still, How to use this ?
+
+Yes! Coming to that. but first let's create the store and pass the state to all components. 
+
+### What is redux Store ?
+
+Just remember one thing redux store is a global storage of your states. Rright now, your reducer is holding your state. which you wanna pass down to all the components. For that you will have to create redux store and provide the store to the whole react app.
+
+First, we will get the createStore function from 'redux'.\
+Import our reducer.\
+Pass reducer to the createStore to get the redux store ready. \
+You can name it anything, I will just keep it store. Like this.
+
+\-------Code Example ------ 
+
+#### Combine Reducer
+
+This is just for the one simple reducers. But inside your big application you will have multiple reducers, for that you will have to import all the reducers and combine that and than pass to create store.
+
+To do that, go inside the reducer folder and make a new js file called : rootReducer.js
+
+You will have to import combineReducer from react-redux. combineReducer will accept an object with all reducers. \
+Import all the reducers you have here. and pass it as object value. \
+Remember, Whatever you will name your key for reducer here, you will have to use the same name to select it later. So, I will keep it same as it's imported name
+
+Export it.
+
+\-------root reducer--------
+
+Now after combining all the reducers you can import root reducer
 
 
 
-Also you can accept the argument
+Than import provider from 'react-redux' and we will wrap this Provider around our whole app and pass store to it as props. Like this 
 
-Just remember one thing Store is a global storage of your data (state) and your data changing methods (setState), so you can access it from anywhere.
+\------ full code example -----
 
-Action is a command which will heard by reducer and reducer will than change the value of state.
+Now, we are ready to select our state in any reducer and dispatch actions to change it as well. Let's learn how to do that. Fun begins here.
 
-### Let's Create Global Redux Store
+### How to select redux-store values with Hooks?
 
-Let's take the easiest part down, creating store and providing it to all the components. 
 
-* producers
-* roasters
-* importers/exporters
-* retailers
-* manufacturers
-* baristas
 
-For over 30 years, SCAA has been dedicated to creating a vibrant specialty coffee community by recognizing, developing and promoting specialty coffee. SCAA sets and maintains quality standards for the industry, conducts market research, and provides education, training, resources, and business services for its members.
+### How to dispatch action with Hooks?
 
-Coffee cupping, or coffee tasting, is the practice of observing the tastes and aromas of brewed coffee. It is a professional practice but can be done informally by anyone or by professionals known as "Q Graders". A standard coffee cupping procedure involves deeply sniffing the coffee, then loudly slurping the coffee so it spreads to the back of the tongue.
 
-The coffee taster attempts to measure aspects of the coffee's taste, specifically the body (the texture or mouthfeel, such as oiliness), sweetness, acidity (a sharp and tangy feeling, like when biting into an orange), flavour (the characters in the cup), and aftertaste. Since coffee beans embody telltale flavours from the region where they were grown, cuppers may attempt to identify the coffee's origin.
+
+### Why you should know both ? 
+
+Because there are so many places where you will find old code with react   16 even. Also you can not use hooks with class based components. 
+
+How to select redux-store values without Hooks
+
+How to dispatch action without Hooks
+
+
+
+Here is the cheatsheet
+
+Reducer
+
+combine multiple reducer make root reducer
+
+create store with root reducer and provide it to app.
+
+create action
+
+dispatch action
